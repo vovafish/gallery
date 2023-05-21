@@ -1,6 +1,6 @@
 /* eslint-disable no-sparse-arrays */
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Card from './components/Card';
 import UploadForm from './components/UploadForm';
@@ -14,16 +14,31 @@ const photos = [
   'https://picsum.photos/id/1006/200/200',
 ];
 function App() {
-  const [input, setInput] = useState();
+  const [count, setCount] = useState();
+  const [inputs, setInputs] = useState({ title: null, file: null, path: null });
   const [items, setItems] = useState(photos);
   const [isCollapsed, collapsed] = useState(false);
 
   const toggle = () => collapsed(!isCollapsed);
-  const handleOnChange = (e) => setInput(e.target.value);
+  const handleOnChange = (e) => {
+    if (e.target.name === 'file') {
+      setInputs({
+        ...inputs,
+        file: e.target.files[0],
+        path: URL.createObjectURL(e.target.files[0]),
+      });
+    } else {
+      setInputs({ ...inputs, title: e.target.value });
+    }
+  };
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    setItems([input, ...items]);
+    setItems([inputs.path, ...items]);
   };
+
+  useEffect(() => {
+    setCount(`you have ${items.length} image${items.length > 1 ? 's' : ''}`);
+  }, [items]);
 
   return (
     <>
@@ -38,6 +53,7 @@ function App() {
           onChange={handleOnChange}
           onSubmit={handleOnSubmit}
         />
+        {count}
         <h1>Gallery</h1>
         <div className="row">
           {items.map((photo) => (
