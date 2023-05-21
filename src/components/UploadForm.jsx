@@ -1,9 +1,32 @@
-const UploadForm = ({ isVisible, onChange, onSubmit }) => {
+import { useMemo } from 'react';
+
+const Preview = ({ path }) => {
+  return (
+    path && (
+      <div
+        className="rounded p-1 m-5"
+        style={{
+          width: '30%',
+          height: '300px',
+          backgroundImage: `url(${path}`,
+          backgroundSize: 'cover',
+        }}
+      ></div>
+    )
+  );
+};
+
+const UploadForm = ({ inputs, isVisible, onChange, onSubmit }) => {
+  const isDisabled = useMemo(() => {
+    return !!Object.values(inputs).some((input) => !input); // if any of the object value are empty we returning true
+  }, [inputs]);
+
   return (
     isVisible && (
       <>
         <p className="display-6 text-center mb-3">Upload Stock Image</p>
         <div className="mb-5 d-flex align-items-center justify-content-center">
+          <Preview {...inputs} />
           <form
             className="mb-2"
             style={{ textAlign: 'left' }}
@@ -27,7 +50,11 @@ const UploadForm = ({ isVisible, onChange, onSubmit }) => {
                 onChange={onChange}
               />
             </div>
-            <button type="submit" className="btn btn-success float-end">
+            <button
+              type="submit"
+              className="btn btn-success float-end"
+              disabled={isDisabled}
+            >
               Save changes
             </button>
           </form>
