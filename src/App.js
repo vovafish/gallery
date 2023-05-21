@@ -14,10 +14,17 @@ const photos = [
   'https://picsum.photos/id/1006/200/200',
 ];
 function App() {
+  const [input, setInput] = useState();
   const [items, setItems] = useState(photos);
   const [isCollapsed, collapsed] = useState(false);
 
   const toggle = () => collapsed(!isCollapsed);
+  const handleOnChange = (e) => setInput(e.target.value);
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    setItems([input, ...items]);
+  };
+
   return (
     <>
       <Navbar />
@@ -26,7 +33,11 @@ function App() {
           {isCollapsed ? 'Close' : '+Add'}
         </button>
         <div className="clearfix mb-4"></div>
-        <UploadForm isVisible={isCollapsed} />
+        <UploadForm
+          isVisible={isCollapsed}
+          onChange={handleOnChange}
+          onSubmit={handleOnSubmit}
+        />
         <h1>Gallery</h1>
         <div className="row">
           {items.map((photo) => (
