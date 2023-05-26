@@ -1,6 +1,5 @@
 /* eslint-disable no-sparse-arrays */
 import './App.css';
-import app from './lib/firebase.config';
 import { useState, useEffect, useReducer, useMemo, useContext } from 'react';
 import Card from './components/Card';
 import Layout from './components/Layout';
@@ -14,10 +13,6 @@ function App() {
       state.items.length > 1 ? 's' : ''
     }`;
   }, [state.items]);
-
-  useEffect(() => {
-    app();
-  }, []);
 
   return (
     <Layout>
