@@ -1,9 +1,12 @@
 /* eslint-disable no-sparse-arrays */
 import './App.css';
 import { useState, useEffect, useReducer, useMemo, useContext } from 'react';
+import { Context } from './context';
+import Firestore from './handlers/firestore';
 import Card from './components/Card';
 import Layout from './components/Layout';
-import { Context } from './context';
+
+const { readDocs } = Firestore;
 
 function App() {
   const { state } = useContext(Context);
@@ -13,6 +16,10 @@ function App() {
       state.items.length > 1 ? 's' : ''
     }`;
   }, [state.items]);
+
+  useEffect(() => {
+    readDocs().then(console.log);
+  }, []);
 
   return (
     <Layout>
