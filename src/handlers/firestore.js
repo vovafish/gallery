@@ -34,7 +34,7 @@ const Firestore = {
         await setDoc(docRef, {
           title: inputs.title,
           path: inputs.path,
-          createAt: serverTimestamp(),
+          createdAt: serverTimestamp(),
         });
         resolve('new doc successfully inserted');
       } catch (e) {}
