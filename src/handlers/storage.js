@@ -1,4 +1,4 @@
-import { ref, uploadBytes } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../lib/firebase.config';
 
 const Storage = {
@@ -9,6 +9,17 @@ const Storage = {
         uploadBytes(mediaRef, media.file).then((spanshot) => {
           resolve({ path: spanshot.metadata.fullPath, name: media.title });
         });
+      } catch (e) {
+        console.error(e);
+      }
+    });
+  },
+  downloadFile: (media) => {
+    return new Promise(async (resolve) => {
+      try {
+        const mediaRef = ref(storage, media.path);
+        const fileURL = await getDownloadURL(mediaRef);
+        resolve(fileURL);
       } catch (e) {
         console.error(e);
       }
