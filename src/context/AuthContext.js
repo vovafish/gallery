@@ -1,7 +1,7 @@
-import { createContext, useState, useMemo, Children, useContext } from 'react';
+import { createContext, useContext, useMemo, useState } from 'react';
 import FirebaseAuth from '../handlers/auth';
 
-const { signIn, signOut } = FirebaseAuth;
+const { signIn, signOut, getCurrentUser } = FirebaseAuth;
 const Context = createContext();
 
 const AuthProvider = ({ children }) => {
@@ -22,5 +22,4 @@ const AuthProvider = ({ children }) => {
 export const useAuthContext = () => {
   return useContext(Context);
 };
-
 export default AuthProvider;

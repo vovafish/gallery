@@ -4,7 +4,6 @@ import Firestore from '../handlers/firestore';
 const { readDocs } = Firestore;
 
 export const Context = createContext();
-
 const photos = [];
 
 const initialState = {
@@ -13,7 +12,6 @@ const initialState = {
   inputs: { title: null, file: null, path: null },
   isCollapsed: false,
 };
-
 const handleOnChange = (state, e) => {
   if (e.target.name === 'file') {
     return {
@@ -33,11 +31,7 @@ function reducer(state, action) {
         ...state,
         items: [state.inputs, ...state.items],
         count: state.items.length + 1,
-        inputs: {
-          title: null,
-          file: null,
-          path: null,
-        },
+        inputs: { title: null, file: null, path: null },
       };
     case 'setItems':
       return {
@@ -71,5 +65,4 @@ const Provider = ({ children }) => {
     </Context.Provider>
   );
 };
-
 export default Provider;

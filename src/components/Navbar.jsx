@@ -1,50 +1,35 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+import { useAuthContext } from '../context/AuthContext';
+
+const LogIn = () => {
+  const { login, currentUser } = useAuthContext();
+  return (
+    !currentUser && (
+      <button type="button" className="btn btn-warning" onClick={login}>
+        Login
+      </button>
+    )
+  );
+};
+
+const LogOut = () => {
+  const { logout, currentUser } = useAuthContext();
+  return (
+    !!currentUser && (
+      <button type="button" className="btn btn-danger" onClick={logout}>
+        Logout
+      </button>
+    )
+  );
+};
+
 function Navigation() {
   return (
     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+      {/* remove all links except HOME */}
       <li className="nav-item">
         <a className="nav-link active" aria-current="page" href="#">
           Home
         </a>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link" href="#">
-          Link
-        </a>
-      </li>
-      <li className="nav-item dropdown">
-        <a
-          className="nav-link dropdown-toggle"
-          href="#"
-          role="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Dropdown
-        </a>
-        <ul className="dropdown-menu">
-          <li>
-            <a className="dropdown-item" href="#">
-              Action
-            </a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Another action
-            </a>
-          </li>
-          <li>
-            <hr className="dropdown-divider" />
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Something else here
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link disabled">Disabled</a>
       </li>
     </ul>
   );
@@ -52,7 +37,7 @@ function Navigation() {
 
 function SearchForm() {
   return (
-    <form className="d-flex" role="search">
+    <form className="d-flex">
       <input
         className="form-control me-2"
         type="search"
@@ -69,6 +54,8 @@ function SearchForm() {
 function Dropdown() {
   return (
     <ul className="navbar-nav mb-2 mb-lg-0">
+      {' '}
+      {/* remove ms-auto */}
       <li className="nav-item dropdown">
         <a
           className="nav-link dropdown-toggle"
@@ -85,7 +72,14 @@ function Dropdown() {
             <a className="dropdown-item text-center" href="#">
               Profile
             </a>
+            <li>
+              <hr className="dropdown divider" />
+            </li>
           </li>
+          <div className="d-flex justify-content-center">
+            <LogIn />
+            <LogOut />
+          </div>
         </ul>
       </li>
     </ul>
@@ -94,10 +88,10 @@ function Dropdown() {
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light mb-5">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
-          Navbar
+          ⚡ Firestock
         </a>
         <button
           className="navbar-toggler"
@@ -119,5 +113,4 @@ function Navbar() {
     </nav>
   );
 }
-
 export default Navbar;

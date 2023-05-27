@@ -6,8 +6,8 @@ const Storage = {
     return new Promise(async (resolve) => {
       try {
         const mediaRef = ref(storage, `images/${media.title}`);
-        uploadBytes(mediaRef, media.file).then((spanshot) => {
-          resolve({ path: spanshot.metadata.fullPath, name: media.title });
+        uploadBytes(mediaRef, media.file).then((snapshot) => {
+          resolve({ path: snapshot.metadata.fullPath, name: media.title });
         });
       } catch (e) {
         console.error(e);
@@ -26,5 +26,4 @@ const Storage = {
     });
   },
 };
-
 export default Storage;

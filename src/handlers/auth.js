@@ -1,4 +1,4 @@
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { signInWithPopup, signOut, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from '../lib/firebase.config';
 
 const provider = new GoogleAuthProvider();
@@ -23,6 +23,10 @@ const FirebaseAuth = {
         .catch(console.error);
     });
   },
+  getCurrentUser: () => {
+    return new Promise((resolve) => {
+      return auth.onAuthStateChanged(resolve);
+    });
+  },
 };
-
 export default FirebaseAuth;

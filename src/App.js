@@ -1,14 +1,14 @@
-/* eslint-disable no-sparse-arrays */
-import './App.css';
-import { useState, useEffect, useReducer, useMemo, useContext } from 'react';
+import { useMemo, useContext, useEffect } from 'react';
 import { Context } from './context/FirestoreContext';
 import Firestore from './handlers/firestore';
+import { useAuthContext } from './context/AuthContext';
 import Card from './components/Card';
 import Layout from './components/Layout';
+import './App.css';
 
 function App() {
   const { state, read } = useContext(Context);
-
+  const { authenticate } = useAuthContext();
   const count = useMemo(() => {
     return `you have ${state.items.length} image${
       state.items.length > 1 ? 's' : ''
@@ -17,6 +17,7 @@ function App() {
 
   useEffect(() => {
     read();
+    authenticate();
   }, []);
 
   return (
@@ -31,5 +32,4 @@ function App() {
     </Layout>
   );
 }
-
 export default App;

@@ -16,15 +16,13 @@ function Card({ path, title, createdAt }) {
             backgroundRepeat: 'no-repeat',
           }}
         ></div>
-
-        <h5 className="text-center mt-2">{title}</h5>
+        <h5 className="text-center mt-1">{title}</h5>
         <div className="d-flex justify-content-between p-2">
           <p>{timestamp}</p>
-          <i>@user</i>
+          <i>@username</i>
         </div>
       </div>
     </div>
   );
 }
-
 export default Card;

@@ -4,14 +4,13 @@ import Firestore from '../handlers/firestore';
 import Storage from '../handlers/storage';
 
 const { writeDoc } = Firestore;
-
 const { uploadFile, downloadFile } = Storage;
 
 const Preview = () => {
   const { state } = useContext(Context);
   const {
     inputs: { path },
-  } = state;
+  } = state; // destructuring the current state
   return (
     path && (
       <div
@@ -29,7 +28,7 @@ const Preview = () => {
 
 const UploadForm = () => {
   const { dispatch, state } = useContext(Context);
-  const { isCollapsed: isVisible, inputs } = state;
+  const { isCollapsed: isVisible, inputs } = state; // destructuring the current state
   const handleOnChange = (e) =>
     dispatch({ type: 'setInputs', payload: { value: e } });
   const handleOnSubmit = (e) => {
@@ -44,11 +43,10 @@ const UploadForm = () => {
       });
   };
   const isDisabled = useMemo(() => {
-    return !!Object.values(state.inputs).some((input) => !input); // if any of the object value are empty we returning true
-  }, [state.inputs]);
-
+    return !!Object.values(inputs).some((input) => !input);
+  }, [inputs]);
   return (
-    state.isCollapsed && (
+    isVisible && (
       <>
         <p className="display-6 text-center mb-3">Upload Stock Image</p>
         <div className="mb-5 d-flex align-items-center justify-content-center">
@@ -89,5 +87,4 @@ const UploadForm = () => {
     )
   );
 };
-
 export default UploadForm;
