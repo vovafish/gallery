@@ -1,7 +1,7 @@
 /* eslint-disable no-sparse-arrays */
 import './App.css';
 import { useState, useEffect, useReducer, useMemo, useContext } from 'react';
-import { Context } from './context';
+import { Context } from './context/FirestoreContext';
 import Firestore from './handlers/firestore';
 import Card from './components/Card';
 import Layout from './components/Layout';
