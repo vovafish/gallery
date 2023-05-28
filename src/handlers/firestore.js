@@ -35,6 +35,7 @@ const Firestore = {
           title: inputs.title,
           path: inputs.path,
           createdAt: serverTimestamp(),
+          user: inputs.user,
         });
         resolve('new doc successfully inserted');
       } catch (e) {}

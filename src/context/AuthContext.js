@@ -9,13 +9,15 @@ const AuthProvider = ({ children }) => {
 
   const login = () => signIn().then(setCurrentUser);
   const logout = () => signOut().then(() => setCurrentUser(null));
+  const authenticate = () => getCurrentUser().then(setCurrentUser);
   const value = useMemo(() => {
     return {
       login,
       logout,
+      authenticate,
       currentUser,
     };
-  }, [login, logout, currentUser]);
+  }, [login, logout, currentUser, authenticate]);
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };
 
