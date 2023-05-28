@@ -24,6 +24,14 @@
   color: white;
 }
 
+.avatar {
+  border-radius: 50%;
+}
+
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+  left: -130%;
+}
+
 .App-link {
   color: #61dafb;
 }

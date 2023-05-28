@@ -17,8 +17,8 @@ function App() {
 
   useEffect(() => {
     read();
-    authenticate();
-  }, []);
+    /* authenticate(); */
+  }, [read]);
 
   return (
     <Layout>
