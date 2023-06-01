@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import Provider from './context/FirestoreContext';
 import AuthProvider from './context/AuthContext';
 import Layout from './components/Layout';
-import Stocks from './components/Stocks';
+import StockImages from './components/StockImages';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,7 +18,7 @@ root.render(
           <Layout>
             <Routes>
               <Route path="/" element={<App />} />
-              <Route path="/stocks" element={<Stocks />} />
+              <Route path="/stockimages" element={<StockImages />} />
             </Routes>
           </Layout>
         </Router>
