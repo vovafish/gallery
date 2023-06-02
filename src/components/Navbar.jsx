@@ -26,6 +26,7 @@ const LogOut = () => {
 };
 
 function Navigation() {
+  const { currentUser } = useAuthContext();
   return (
     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
       <li className="nav-item">
@@ -34,9 +35,15 @@ function Navigation() {
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link active" aria-current="page" to="/stockimages">
-          My Stock Images
-        </Link>
+        {currentUser && (
+          <Link
+            className="nav-link active"
+            aria-current="page"
+            to="/stockimages"
+          >
+            My Stock Images
+          </Link>
+        )}
       </li>
     </ul>
   );
