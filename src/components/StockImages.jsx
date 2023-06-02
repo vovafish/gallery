@@ -2,8 +2,9 @@ import List from './List';
 import { useFirestoreContext } from '../context/FirestoreContext';
 import { useAuthContext } from '../context/AuthContext';
 import { useMemo } from 'react';
+
 const StockImages = () => {
-  const { state } = useFirestoreContext;
+  const { state } = useFirestoreContext();
   const { currentUser } = useAuthContext();
 
   const items = useMemo(() => {
@@ -15,7 +16,7 @@ const StockImages = () => {
   }, [state.items, currentUser]);
   return (
     <>
-      <h1>My Stocks</h1>
+      <h1>My Stock Images</h1>
       <List items={items} />
     </>
   );

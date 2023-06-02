@@ -1,7 +1,7 @@
 import { useMemo, useContext } from 'react';
 import { Context } from '../context/FirestoreContext';
-import Firestore from '../handlers/firestore';
 import { useAuthContext } from '../context/AuthContext';
+import Firestore from '../handlers/firestore';
 import Storage from '../handlers/storage';
 
 const { writeDoc } = Firestore;
@@ -9,6 +9,7 @@ const { uploadFile, downloadFile } = Storage;
 
 const Preview = () => {
   const { state } = useContext(Context);
+  const { currentUser } = useAuthContext();
   const {
     inputs: { path },
   } = state; // destructuring the current state
@@ -31,11 +32,11 @@ const UploadForm = () => {
   const { dispatch, state, read } = useContext(Context);
   const { currentUser } = useAuthContext();
   const { isCollapsed: isVisible, inputs } = state; // destructuring the current state
+
   const handleOnChange = (e) =>
     dispatch({ type: 'setInputs', payload: { value: e } });
 
-  const username = currentUser?.displayName.split('').join('');
-
+  const username = currentUser?.displayName.split(' ').join('');
   const handleOnSubmit = (e) => {
     e.preventDefault();
     uploadFile(state.inputs)
