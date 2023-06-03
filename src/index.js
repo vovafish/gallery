@@ -8,12 +8,14 @@ import Provider from './context/FirestoreContext';
 import AuthProvider, { useAuthContext } from './context/AuthContext';
 import Layout from './components/Layout';
 import StockImages from './components/StockImages';
+import Single from './components/Single';
 
 function AppRoutes() {
   const { currentUser } = useAuthContext();
   return (
     <Routes>
       <Route path="/" element={<App />} />
+      <Route path="/images/:id" element={<Single />} />
       {currentUser && <Route path="/stockimages" element={<StockImages />} />}
     </Routes>
   );
