@@ -101,7 +101,11 @@ function Dropdown() {
         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
           <li>
             <a className="dropdown-item text-center" href="#">
-              {username}
+              {currentUser ? (
+                <Link to="/profile">{username}</Link>
+              ) : (
+                'Sign In Now'
+              )}
             </a>
             <li>
               <hr className="dropdown divider" />

@@ -9,6 +9,8 @@ import AuthProvider, { useAuthContext } from './context/AuthContext';
 import Layout from './components/Layout';
 import StockImages from './components/StockImages';
 import Single from './components/Single';
+import NotFound from './components/NotFound';
+import Profile from './components/Profile';
 
 function AppRoutes() {
   const { currentUser } = useAuthContext();
@@ -16,6 +18,8 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/images/:id" element={<Single />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="*" element={<NotFound />} />
       {currentUser && <Route path="/stockimages" element={<StockImages />} />}
     </Routes>
   );
